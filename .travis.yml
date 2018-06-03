@@ -1,0 +1,59 @@
+sudo: required
+language : java
+jdk: oraclejdk8
+
+env:
+  global:
+  - secure: "DXsGvEfjW5UKSc5Za6QHpu8xQfJP0y4ng4c0yhCjcPIy
+  M0sWeIU3CHb0fIctsFV3MQ0ro+ThPq/M11M9jLkpTLq9MJ8q5jzGkHK0+FvZWl2SBk+NuQwY8w92G92oY2cZND0MsWtldFFC
+  zk3eJZzCXYE2PTgaURpkZaRuwAj+K7HEXFuBracssMRRSaI88ZbXywMmga41ATz9lJ1gEyEGQVAftdnuk4N/Rwgwc7y/F5FF
+  dXIpS70FF3ylLJQK0EcER/7qrsk4BNfRysbm7/iqjU8+avWqotfUOCjIgfNsr2GDrXs+I4v1dDt+GFvr7PD6FnTJerfmLjiZ
+  HnO3q85vkiXstUz8N528XZ4qohWNpOVZVhKjDZbzXvr1Ay4F7vBwvJFsQsJ5N7Ir8gZJHxtXXNu8dAqEx0pC5Zlb/d9fwIeu7
+  YtzSvNdBB+bvoc6Vb++EB9Ufm6M4xmlvLAbz34WvdyaiGMUu4//wd+DVoJywkEcPZzztujIfOQwOu+lfBdj4fIcE695MQY9EO
+  ccl4qnqUJViIQhhNs8XeqeJjyHY56y6RP9+Ul09wV25kNFQi6fF96bRIjqCfKi02xzk/8R9vZEjX4FHGpWnluyDKPqAuy+iBF
+  bVpWjCc63jP45oWICI+WDZlyTq3XKlGzztHnKuCIdhIzEixbQgvadJe4qDLc="
+  - secure: "XDJqHH9Zt2s07Mkg6NT+pQLsr2nNDqIKdbqORv8W7rfw4bZetSJSX4aay/
+  ao16u+OtclmHrbkq+4OQkITSwxJR21ysRN2XNvrrlHTHPdMumd9Jr8PRrRohAwX/RBMLEdoJwjnpo2AF6qg
+  4exwLbWQAlxGEjJqLgAEqz3XS3q1Usc/SiLVXIpvPKtinXhgd59Ops8oUskPtSmjDUVBfYKEnRoujYRQg5Bw
+  crD8Z3wIpxZGMawLiG+2j59HcRS3Aeo/bBP8zb4huIvCJyVkSVD7eCW+oXxspUfXoEexByMvR2mxaH3ik69E69
+  bnCcke70tB+lX6um7Fm7U+V3fSy4+BJbCY1qQ6eF6jEZrUM4z/QrE3FcrC4iNQ7onejS7scHo4EiFyZpTgqdZz
+  4tCwOp9G8fmDQwdFOZzlGtwE1AFuElK9kPEidX3JBZvitbsA/YTWeUgU6LkPlnEbadA/JxKxmDgE8t4mtV6k5g7
+  XHQaF7AstbU1tDrpN4+OpoO98BbJDXZ9SnzSmA4D00/WnlB97GBqnkA9Yip4OXjMwnAM7WUYXdUIjL3zvybPLqTw
+  h+nr7I6e6hhVRpjINU2WwmYZXAha1vqWrSyS9NtVH0odrkAz1DY7AKGskRuBH/Al3uFiWcNzg3LvBsuBuxyp0UGdikZJubMsYtuAv09p+FZTWQo="
+  - secure: "eKVa60Xi7Cz4ZREsBOCfhtxaXJ57YsYV4Mfd+NCmSyZMJgNqLR9oU0OzZTPcs1/NZyshOj1zFs0UMKbPEw/lTmjcLCG
+  1uIqZZmvYAPo/DCojzd/RQ46yR0i5WDhqAWSJ3kIz2gOYSakMPUjTPiK/YQILslDuhucYHNDPeEs0249Mt6kxK0p4GUON417Hg+2EEVlk
+  XkQ5Vi1QUKktDm1yoioVsqWKkRoqqeZV3CPB2JOApONykFZsiGZyJgHLvIhlWPsDqlzIkqIpIKIk8K/z7mR50a/cLyxVn9Q4tKZcV9hv9qp
+  o7Nr6eH2eQrC7sCeFo+tDq0wfuVXB0uyzPqAX26YseW3zlp9E3k5mKn6GwDUMs0u079SnY47zGiJYRCs48gLNkcZ59/9pBHBZYVQRbPJVOim5
+  fNNM+z7ZhmtxFBvmYyoWfyjMkdTSQw+9yJ9NgCFbg/aL8nDfHGlaYve770yc9MEJ9Q4B0L/LehP5rGj+jcuDBBREDjva3o0ae2WBo+xqUbtT6dm
+  hBljaWQhLJqK9/6ztZeLdHXqC46PAHzAuEJLN4sZwfQKjYzdK6fAFa0ASO51WJ+FwbjDSc476Xbc3YK/lGpw9wd7GgpbXnfYaHUA16/4jbdohrm9
+  7w+uG4XTGcTimindyjq5i6o697G8l6xTEwIYaUbqub2fzsD0="
+  - secure: "e6ea8e58-aea2-456f-bd8b-d30c99f5f12d"
+  - COMMIT=${TRAVIS_COMMIT::7}
+
+
+
+addons:
+  sonarcloud:
+    organization: "ianarb-github"
+    token:
+      secure: $SONAR_TOKEN
+
+script:
+- ./gradlew clean test jacocoFullReport
+
+services:
+  - docker
+
+after_success:
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
+  - export IMAGE_NAME=ianarbuckle/restaurant-looker-api
+  - docker build -t $IMAGE_NAME:$COMMIT .
+  - docker tag $IMAGE_NAME:$COMMIT $IMAGE_NAME:$TAG
+  - docker push $IMAGE_NAME
+
+deploy:
+  provider: heroku
+  api_key: $HEROKU_API_KEY
+  app: blooming-basin-97212
+
