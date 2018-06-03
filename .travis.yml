@@ -39,21 +39,22 @@ addons:
       secure: $SONAR_TOKEN
 
 script:
-- ./gradlew clean test jacocoFullReport
+- ./gradlew clean test
+- ./gradlew jacocoFullReport
 
-services:
-  - docker
-
-after_success:
-  - docker login -u $DOCKER_USER -p $DOCKER_PASS
-  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
-  - export IMAGE_NAME=ianarbuckle/restaurant-looker-api
-  - docker build -t $IMAGE_NAME:$COMMIT .
-  - docker tag $IMAGE_NAME:$COMMIT $IMAGE_NAME:$TAG
-  - docker push $IMAGE_NAME
-
-deploy:
-  provider: heroku
-  api_key: $HEROKU_API_KEY
-  app: blooming-basin-97212
+#services:
+#  - docker
+#
+#after_success:
+#  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+#  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
+#  - export IMAGE_NAME=ianarbuckle/restaurant-looker-api
+#  - docker build -t $IMAGE_NAME:$COMMIT .
+#  - docker tag $IMAGE_NAME:$COMMIT $IMAGE_NAME:$TAG
+#  - docker push $IMAGE_NAME
+#
+#deploy:
+#  provider: heroku
+#  api_key: $HEROKU_API_KEY
+#  app: blooming-basin-97212
 
