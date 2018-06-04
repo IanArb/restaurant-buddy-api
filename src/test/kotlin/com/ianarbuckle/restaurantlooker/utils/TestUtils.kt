@@ -1,8 +1,14 @@
 package com.ianarbuckle.restaurantlooker.utils
 
+import com.fasterxml.jackson.annotation.JsonInclude
 import com.ianarbuckle.restaurantlooker.model.Location
 import com.ianarbuckle.restaurantlooker.model.Restaurant
 import com.ianarbuckle.restaurantlooker.model.Restaurants
+import com.fasterxml.jackson.databind.ObjectMapper
+import org.springframework.http.MediaType
+import java.io.IOException
+import java.nio.charset.Charset
+
 
 /**
  * @author ianarbuckle on 28/05/2018.
@@ -42,6 +48,15 @@ class TestUtils {
                     Location(0.5f, 0.10f), "OPEN"))
 
             return restaurants
+        }
+
+        val APPLICATION_JSON_UTF8 = MediaType(MediaType.APPLICATION_JSON.type, MediaType.APPLICATION_JSON.subtype, Charset.forName("utf8"))
+
+        @Throws(IOException::class)
+        fun convertObjectToJsonBytes(`object`: Any): ByteArray {
+            val mapper = ObjectMapper()
+            mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL)
+            return mapper.writeValueAsBytes(`object`)
         }
     }
 
