@@ -1,10 +1,8 @@
 package com.ianarbuckle.restaurantlooker.utils
 
 import com.fasterxml.jackson.annotation.JsonInclude
-import com.ianarbuckle.restaurantlooker.model.Location
-import com.ianarbuckle.restaurantlooker.model.Restaurant
-import com.ianarbuckle.restaurantlooker.model.Restaurants
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.ianarbuckle.restaurantlooker.model.*
 import org.springframework.http.MediaType
 import java.io.IOException
 import java.nio.charset.Charset
@@ -31,33 +29,55 @@ class TestUtils {
             val restaurants = mutableListOf<Restaurants>()
 
             restaurants.add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                    Location(0.5f, 0.10f), "OPEN"))
+                    Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu())))
             restaurants.add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                    Location(0.5f, 0.10f), "OPEN"))
+                    Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu())))
             restaurants.add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                    Location(0.5f, 0.10f), "OPEN"))
+                    Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu())))
             restaurants.add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                    Location(0.5f, 0.10f), "OPEN"))
+                    Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu())))
             restaurants.add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                    Location(0.5f, 0.10f), "OPEN"))
+                    Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu())))
             restaurants.add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                    Location(0.5f, 0.10f), "OPEN"))
+                    Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu())))
             restaurants.add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                    Location(0.5f, 0.10f), "OPEN"))
+                    Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu())))
             restaurants.add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                    Location(0.5f, 0.10f), "OPEN"))
+                    Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu())))
 
             return restaurants
         }
 
-        val APPLICATION_JSON_UTF8 = MediaType(MediaType.APPLICATION_JSON.type, MediaType.APPLICATION_JSON.subtype, Charset.forName("utf8"))
+        private fun createLunchMenu(): MutableList<Dish> {
+            val lunch = mutableListOf<Dish>()
 
-        @Throws(IOException::class)
-        fun convertObjectToJsonBytes(`object`: Any): ByteArray {
-            val mapper = ObjectMapper()
-            mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL)
-            return mapper.writeValueAsBytes(`object`)
+            lunch.add(Dish("STARTER", "Soup of the day", "Fresh soup of the day", Price("EUR", 5.5f)))
+            lunch.add(Dish("PIZZA", "MARGHERITA", "Tomato Sauce, Mozzarella, Parmesan & Fresh Basil", Price("EUR", 9f)))
+            lunch.add(Dish("DESERT", "Cheese cake", "Strawberry cheese cake", Price("EUR", 6.5f)))
+
+            return lunch
         }
+
+        private fun createDinnerMenu(): MutableList<Dish> {
+            val dinner = mutableListOf<Dish>()
+
+            dinner.add(Dish("STARTER", "Soup of the day", "Fresh soup of the day", Price("EUR", 5.5f)))
+            dinner.add(Dish("PIZZA", "MARGHERITA", "Tomato Sauce, Mozzarella, Parmesan & Fresh Basil", Price("EUR", 9f)))
+            dinner.add(Dish("DESERT", "Cheese cake", "Strawberry cheese cake", Price("EUR", 6.5f)))
+
+            return dinner
+        }
+
+        fun asJsonString(obj: Any): String {
+            try {
+                val mapper = ObjectMapper()
+                return mapper.writeValueAsString(obj)
+            } catch (e: Exception) {
+                throw RuntimeException(e)
+            }
+
+        }
+
     }
 
 

@@ -9,4 +9,6 @@ interface RestaurantService {
     fun findAllRestaurants(): MutableList<Restaurant>
     fun saveRestaurant(restaurant: Restaurant)
     fun deleteRestaurantsById(id: String): MutableList<Restaurant>
+    fun updateRestaurant(restaurant: Restaurant)
+
 }

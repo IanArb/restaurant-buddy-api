@@ -21,4 +21,8 @@ class RestaurantServiceImpl : RestaurantService {
     }
 
     override fun deleteRestaurantsById(id: String): MutableList<Restaurant> = repository.deleteRestaurantById(id)
+
+    override fun updateRestaurant(restaurant: Restaurant) {
+        repository.save(restaurant)
+    }
 }
