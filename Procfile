@@ -1,1 +1,0 @@
-web java -Dserver.port=$PORT -Dspring.profiles.active=heroku $JAVA_OPTS -jar target/restaurant-looker-api-0.0.4-SNAPSHOT-exec.jar

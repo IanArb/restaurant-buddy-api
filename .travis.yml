@@ -24,4 +24,4 @@ after_success:
 deploy:
   provider: heroku
   api_key: e6ea8e58-aea2-456f-bd8b-d30c99f5f12d
-  app: blooming-basin-97212
+  app: restaurant-buddy-server
