@@ -68,4 +68,32 @@ class RestaurantControllerTest {
         verifyNoMoreInteractions(service)
     }
 
+    @Test
+    fun test_saveRestaurants_shouldNotReturnBadRequest() {
+        whenever(service.findAllRestaurants()).thenReturn(TestUtils.buildRestaurantMock())
+
+        mockMvc.perform(post("/restaurants", 1)
+                .content(TestUtils.asJsonString(TestUtils.buildRestaurantMock()[0]))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated)
+
+        verify(service).saveRestaurant(TestUtils.buildRestaurantMock()[0])
+        verifyNoMoreInteractions(service)
+    }
+
+    @Test
+    fun test_updateRestaurants_shouldNotReturnBadRequest() {
+        whenever(service.findAllRestaurants()).thenReturn(TestUtils.buildRestaurantMock())
+
+        mockMvc.perform(put("/restaurants", 1)
+                .content(TestUtils.asJsonString(TestUtils.buildRestaurantMock()[0]))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk)
+
+        verify(service).updateRestaurant(TestUtils.buildRestaurantMock()[0])
+        verifyNoMoreInteractions(service)
+    }
+
 }

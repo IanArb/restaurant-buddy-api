@@ -28,4 +28,8 @@ class RestaurantController {
     @ResponseStatus(HttpStatus.OK)
     fun deleteRestaurants(@PathVariable id: String): MutableList<Restaurant> = service.deleteRestaurantsById(id)
 
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    fun updateRestaurants(@RequestBody restaurant: Restaurant) = service.updateRestaurant(restaurant)
+
 }
