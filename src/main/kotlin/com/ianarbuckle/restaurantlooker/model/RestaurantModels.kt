@@ -14,7 +14,7 @@ data class Restaurant(@Id val id: String?, val results: MutableList<Restaurants>
 
 @Document
 data class Restaurants(val restaurantName: String, val description: String, val county: String, val street: String,
-                       val address: String, val location: Location, val status: String, val menu: Menu)
+                       val address: String, val location: Location, val status: String, val menu: Menu, val imageUrl: String)
 
 @Document
 data class Location(val latitude: Float, val longitude: Float)

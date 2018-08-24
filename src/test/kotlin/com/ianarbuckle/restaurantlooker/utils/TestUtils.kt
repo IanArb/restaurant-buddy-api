@@ -28,22 +28,24 @@ class TestUtils {
         fun getDataList(): MutableList<Restaurants> {
             val restaurants = mutableListOf<Restaurants>()
 
-            restaurants.add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                    Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu())))
-            restaurants.add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                    Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu())))
-            restaurants.add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                    Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu())))
-            restaurants.add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                    Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu())))
-            restaurants.add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                    Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu())))
-            restaurants.add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                    Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu())))
-            restaurants.add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                    Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu())))
-            restaurants.add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                    Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu())))
+            restaurants.apply {
+                add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
+                        Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), ""))
+                add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
+                        Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), ""))
+                add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
+                        Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), ""))
+                add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
+                        Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), ""))
+                add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
+                        Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), ""))
+                add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
+                        Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), ""))
+                add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
+                        Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), ""))
+                add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
+                        Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), ""))
+            }
 
             return restaurants
         }
