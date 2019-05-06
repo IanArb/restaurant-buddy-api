@@ -1,7 +1,6 @@
 package com.ianarbuckle.restaurantlooker.controller
 
 import com.ianarbuckle.restaurantlooker.RestaurantLookerApplication
-import com.ianarbuckle.restaurantlooker.model.Restaurant
 import com.ianarbuckle.restaurantlooker.utils.TestUtils
 import com.ianarbuckle.restaurantlooker.service.RestaurantService
 import org.junit.Before
@@ -44,7 +43,7 @@ class RestaurantControllerTest {
     }
 
     @Test
-    fun test_findAllRestaurants_shouldReturnRestaurants() {
+    fun `verify that when created should return restaurants`() {
         whenever(service.findAllRestaurants()).thenReturn(TestUtils.buildRestaurantMock())
 
         mockMvc.perform(get("/restaurants").accept(MediaType.APPLICATION_JSON))
@@ -56,7 +55,7 @@ class RestaurantControllerTest {
     }
 
     @Test
-    fun test_deleteRestaurantById_shouldDeleteRestaurantById() {
+    fun `verify that delete restaurant by id should delete expected restaurant`() {
         whenever(service.deleteRestaurantsById("1")).thenReturn(TestUtils.buildRestaurantMock())
 
         mockMvc.perform(delete("/restaurants" + "/{id}", 1)
@@ -69,7 +68,7 @@ class RestaurantControllerTest {
     }
 
     @Test
-    fun test_saveRestaurants_shouldNotReturnBadRequest() {
+    fun `verify that find all restaurants should not return bad request`() {
         whenever(service.findAllRestaurants()).thenReturn(TestUtils.buildRestaurantMock())
 
         mockMvc.perform(post("/restaurants", 1)
@@ -83,7 +82,7 @@ class RestaurantControllerTest {
     }
 
     @Test
-    fun test_updateRestaurants_shouldNotReturnBadRequest() {
+    fun `verify that update restaurants should not return bad request`() {
         whenever(service.findAllRestaurants()).thenReturn(TestUtils.buildRestaurantMock())
 
         mockMvc.perform(put("/restaurants", 1)

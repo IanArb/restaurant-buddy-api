@@ -32,7 +32,7 @@ class RestaurantServiceTest {
     }
 
     @Test
-    fun testFindAllRestaurants_shouldReturnExpectedSize() {
+    fun `verify that restaurant object should return expected size and is not empty`() {
         whenever(repository.findAll()).thenReturn(TestUtils.buildRestaurantMock())
 
         service.findAllRestaurants()
@@ -45,7 +45,7 @@ class RestaurantServiceTest {
     }
 
     @Test
-    fun testRestaurants_shouldReturnExpectedSize() {
+    fun `verify find all restaurants should return expected size and is not empty`() {
         whenever(repository.findAll()).thenReturn(TestUtils.buildRestaurantMock())
 
         service.findAllRestaurants()
@@ -58,7 +58,7 @@ class RestaurantServiceTest {
     }
 
     @Test
-    fun testSaveRestaurants_shouldReturnRestaurants() {
+    fun `verify that when creating restaurant it should return create expected restaurant`() {
         val restaurant = Restaurant("1", TestUtils.getDataList())
 
         service.saveRestaurant(restaurant)
@@ -68,7 +68,7 @@ class RestaurantServiceTest {
     }
 
     @Test
-    fun testDeleteRestaurantsById_shouldDeleteRestaurants() {
+    fun `verify that when deleting restaurant by id it should delete expected restaurant`() {
         val restaurant = Restaurant("1", TestUtils.getDataList())
 
         restaurant.id?.let { service.deleteRestaurantsById(it) }
