@@ -1,0 +1,35 @@
+package com.ianarbuckle.restaurantlooker.restaurants.controller
+
+import com.ianarbuckle.restaurantlooker.restaurants.model.Restaurants
+import com.ianarbuckle.restaurantlooker.restaurants.service.RestaurantService
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.*
+
+/**
+ * @author ianarbuckle on 21/05/2018.
+ */
+@RequestMapping("/restaurants")
+@RestController
+class RestaurantController {
+
+    @Autowired
+    private lateinit var service: RestaurantService
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    fun saveRestaurant(@RequestBody restaurant: Restaurants) = service.saveRestaurant(restaurant)
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    fun retrieveRestaurants(): MutableList<Restaurants> = service.findAllRestaurants()
+
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    fun deleteRestaurants(@PathVariable id: String): MutableList<Restaurants> = service.deleteRestaurantsById(id)
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    fun updateRestaurants(@RequestBody restaurant: Restaurants) = service.updateRestaurant(restaurant)
+
+}

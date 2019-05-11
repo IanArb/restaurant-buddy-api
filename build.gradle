@@ -71,13 +71,14 @@ repositories {
 }
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-actuator')
-    compile('org.springframework.boot:spring-boot-starter-data-mongodb')
-    compile('org.springframework.boot:spring-boot-starter-web')
-    compile('com.fasterxml.jackson.module:jackson-module-kotlin')
-    compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    compile("org.jetbrains.kotlin:kotlin-reflect")
-    testCompile('org.springframework.boot:spring-boot-starter-test')
-    testCompile "com.google.truth:truth:0.40"
-    compile 'joda-time:joda-time:2.3'
+    implementation('org.springframework.boot:spring-boot-starter-actuator')
+    implementation('org.springframework.boot:spring-boot-starter-data-mongodb')
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('com.fasterxml.jackson.module:jackson-module-kotlin')
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation "com.google.truth:truth:0.40"
+    implementation 'joda-time:joda-time:2.3'
+    implementation('com.fasterxml.jackson.datatype:jackson-datatype-joda')
 }
