@@ -1,86 +1,96 @@
 package com.ianarbuckle.restaurantlooker.utils
 
-import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.ianarbuckle.restaurantlooker.model.*
-import org.springframework.http.MediaType
-import java.io.IOException
-import java.nio.charset.Charset
+import com.fasterxml.jackson.databind.SerializationFeature
+import com.fasterxml.jackson.datatype.joda.JodaModule
+import com.ianarbuckle.restaurantlooker.booking.model.*
+import com.ianarbuckle.restaurantlooker.restaurants.model.*
+import org.joda.time.DateTime
 
 
 /**
  * @author ianarbuckle on 28/05/2018.
  */
-class TestUtils {
+object TestUtils {
 
-    companion object RestaurantMockData {
+    fun buildRestaurantsModel(): MutableList<Restaurants> {
+        val restaurants = mutableListOf<Restaurants>()
 
-        fun buildRestaurantMock() : MutableList<Restaurant> {
-            val restaurants = mutableListOf<Restaurant>()
+        val restaurantData = Restaurants("1", getDataList())
 
-            val restaurantData = Restaurant("1", getDataList())
+        restaurants.add(restaurantData)
 
-            restaurants.add(restaurantData)
+        return restaurants
+    }
 
-            return restaurants
+    fun getDataList(): MutableList<Restaurant> {
+        val restaurants = mutableListOf<Restaurant>()
+
+        restaurants.apply {
+            add(Restaurant("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
+                    Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), ""))
+            add(Restaurant("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
+                    Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), ""))
+            add(Restaurant("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
+                    Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), ""))
+            add(Restaurant("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
+                    Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), ""))
+            add(Restaurant("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
+                    Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), ""))
+            add(Restaurant("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
+                    Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), ""))
+            add(Restaurant("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
+                    Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), ""))
+            add(Restaurant("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
+                    Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), ""))
         }
 
-        fun getDataList(): MutableList<Restaurants> {
-            val restaurants = mutableListOf<Restaurants>()
+        return restaurants
+    }
 
-            restaurants.apply {
-                add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                        Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), ""))
-                add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                        Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), ""))
-                add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                        Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), ""))
-                add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                        Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), ""))
-                add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                        Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), ""))
-                add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                        Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), ""))
-                add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                        Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), ""))
-                add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                        Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), ""))
-            }
+    private fun createLunchMenu(): MutableList<Dish> {
+        val lunch = mutableListOf<Dish>()
 
-            return restaurants
-        }
+        lunch.add(Dish("STARTER", "Soup of the day", "Fresh soup of the day", Price("EUR", 5.5f)))
+        lunch.add(Dish("PIZZA", "MARGHERITA", "Tomato Sauce, Mozzarella, Parmesan & Fresh Basil", Price("EUR", 9f)))
+        lunch.add(Dish("DESERT", "Cheese cake", "Strawberry cheese cake", Price("EUR", 6.5f)))
 
-        private fun createLunchMenu(): MutableList<Dish> {
-            val lunch = mutableListOf<Dish>()
+        return lunch
+    }
 
-            lunch.add(Dish("STARTER", "Soup of the day", "Fresh soup of the day", Price("EUR", 5.5f)))
-            lunch.add(Dish("PIZZA", "MARGHERITA", "Tomato Sauce, Mozzarella, Parmesan & Fresh Basil", Price("EUR", 9f)))
-            lunch.add(Dish("DESERT", "Cheese cake", "Strawberry cheese cake", Price("EUR", 6.5f)))
+    private fun createDinnerMenu(): MutableList<Dish> {
+        val dinner = mutableListOf<Dish>()
 
-            return lunch
-        }
+        dinner.add(Dish("STARTER", "Soup of the day", "Fresh soup of the day", Price("EUR", 5.5f)))
+        dinner.add(Dish("PIZZA", "MARGHERITA", "Tomato Sauce, Mozzarella, Parmesan & Fresh Basil", Price("EUR", 9f)))
+        dinner.add(Dish("DESERT", "Cheese cake", "Strawberry cheese cake", Price("EUR", 6.5f)))
 
-        private fun createDinnerMenu(): MutableList<Dish> {
-            val dinner = mutableListOf<Dish>()
+        return dinner
+    }
 
-            dinner.add(Dish("STARTER", "Soup of the day", "Fresh soup of the day", Price("EUR", 5.5f)))
-            dinner.add(Dish("PIZZA", "MARGHERITA", "Tomato Sauce, Mozzarella, Parmesan & Fresh Basil", Price("EUR", 9f)))
-            dinner.add(Dish("DESERT", "Cheese cake", "Strawberry cheese cake", Price("EUR", 6.5f)))
+    fun buildBookingsModel(): MutableList<Booking> {
+        val bookings = mutableListOf<Booking>()
 
-            return dinner
-        }
+        bookings.add(createBooking())
 
-        fun asJsonString(obj: Any): String {
-            try {
-                val mapper = ObjectMapper()
-                return mapper.writeValueAsString(obj)
-            } catch (e: Exception) {
-                throw RuntimeException(e)
-            }
+        return bookings
+    }
 
+    fun createBooking(): Booking {
+        val dateTime = DateTime("2019-05-07T15:48:35.095Z").toLocalDateTime()
+        return Booking("1", Owner("24345-34534-34534", "John Doe", 10998980), "Crillios", Table("FAMILY", 4, true, true, dateTime))
+    }
+
+    fun asJsonString(obj: Any): String {
+        try {
+            val mapper = ObjectMapper()
+            mapper.registerModule(JodaModule())
+            mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+            return mapper.writeValueAsString(obj)
+        } catch (e: Exception) {
+            throw RuntimeException(e)
         }
 
     }
-
 
 }

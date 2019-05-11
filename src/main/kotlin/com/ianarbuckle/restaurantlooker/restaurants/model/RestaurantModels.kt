@@ -1,4 +1,4 @@
-package com.ianarbuckle.restaurantlooker.model
+package com.ianarbuckle.restaurantlooker.restaurants.model
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
@@ -10,11 +10,11 @@ import org.springframework.data.mongodb.core.mapping.Document
  */
 
 @Document
-data class Restaurant(@Id val id: String?, val results: MutableList<Restaurants>)
+data class Restaurants(@Id val id: String?, val results: MutableList<Restaurant>)
 
 @Document
-data class Restaurants(val restaurantName: String, val description: String, val county: String, val street: String,
-                       val address: String, val location: Location, val status: String, val menu: Menu, val imageUrl: String)
+data class Restaurant(val restaurantName: String, val description: String, val county: String, val street: String,
+                      val address: String, val location: Location, val status: String, val menu: Menu, val imageUrl: String)
 
 @Document
 data class Location(val latitude: Float, val longitude: Float)

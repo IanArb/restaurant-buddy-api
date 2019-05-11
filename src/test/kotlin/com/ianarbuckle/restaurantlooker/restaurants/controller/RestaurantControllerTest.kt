@@ -1,8 +1,8 @@
-package com.ianarbuckle.restaurantlooker.controller
+package com.ianarbuckle.restaurantlooker.restaurants.controller
 
 import com.ianarbuckle.restaurantlooker.RestaurantLookerApplication
+import com.ianarbuckle.restaurantlooker.restaurants.service.RestaurantService
 import com.ianarbuckle.restaurantlooker.utils.TestUtils
-import com.ianarbuckle.restaurantlooker.service.RestaurantService
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -44,7 +44,7 @@ class RestaurantControllerTest {
 
     @Test
     fun `verify that when created should return restaurants`() {
-        whenever(service.findAllRestaurants()).thenReturn(TestUtils.buildRestaurantMock())
+        whenever(service.findAllRestaurants()).thenReturn(TestUtils.buildRestaurantsModel())
 
         mockMvc.perform(get("/restaurants").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk)
@@ -56,7 +56,7 @@ class RestaurantControllerTest {
 
     @Test
     fun `verify that delete restaurant by id should delete expected restaurant`() {
-        whenever(service.deleteRestaurantsById("1")).thenReturn(TestUtils.buildRestaurantMock())
+        whenever(service.deleteRestaurantsById("1")).thenReturn(TestUtils.buildRestaurantsModel())
 
         mockMvc.perform(delete("/restaurants" + "/{id}", 1)
                 .accept(MediaType.APPLICATION_JSON))
@@ -69,29 +69,29 @@ class RestaurantControllerTest {
 
     @Test
     fun `verify that find all restaurants should not return bad request`() {
-        whenever(service.findAllRestaurants()).thenReturn(TestUtils.buildRestaurantMock())
+        whenever(service.findAllRestaurants()).thenReturn(TestUtils.buildRestaurantsModel())
 
         mockMvc.perform(post("/restaurants", 1)
-                .content(TestUtils.asJsonString(TestUtils.buildRestaurantMock()[0]))
+                .content(TestUtils.asJsonString(TestUtils.buildRestaurantsModel()[0]))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated)
 
-        verify(service).saveRestaurant(TestUtils.buildRestaurantMock()[0])
+        verify(service).saveRestaurant(TestUtils.buildRestaurantsModel()[0])
         verifyNoMoreInteractions(service)
     }
 
     @Test
     fun `verify that update restaurants should not return bad request`() {
-        whenever(service.findAllRestaurants()).thenReturn(TestUtils.buildRestaurantMock())
+        whenever(service.findAllRestaurants()).thenReturn(TestUtils.buildRestaurantsModel())
 
         mockMvc.perform(put("/restaurants", 1)
-                .content(TestUtils.asJsonString(TestUtils.buildRestaurantMock()[0]))
+                .content(TestUtils.asJsonString(TestUtils.buildRestaurantsModel()[0]))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk)
 
-        verify(service).updateRestaurant(TestUtils.buildRestaurantMock()[0])
+        verify(service).updateRestaurant(TestUtils.buildRestaurantsModel()[0])
         verifyNoMoreInteractions(service)
     }
 

@@ -1,9 +1,9 @@
-package com.ianarbuckle.restaurantlooker.service
+package com.ianarbuckle.restaurantlooker.restaurants.service
 
 import com.google.common.truth.Truth.assertThat
 import com.ianarbuckle.restaurantlooker.utils.TestUtils
-import com.ianarbuckle.restaurantlooker.model.Restaurant
-import com.ianarbuckle.restaurantlooker.repository.RestaurantRepository
+import com.ianarbuckle.restaurantlooker.restaurants.model.Restaurants
+import com.ianarbuckle.restaurantlooker.restaurants.repository.RestaurantRepository
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -33,7 +33,7 @@ class RestaurantServiceTest {
 
     @Test
     fun `verify that restaurant object should return expected size and is not empty`() {
-        whenever(repository.findAll()).thenReturn(TestUtils.buildRestaurantMock())
+        whenever(repository.findAll()).thenReturn(TestUtils.buildRestaurantsModel())
 
         service.findAllRestaurants()
 
@@ -46,7 +46,7 @@ class RestaurantServiceTest {
 
     @Test
     fun `verify find all restaurants should return expected size and is not empty`() {
-        whenever(repository.findAll()).thenReturn(TestUtils.buildRestaurantMock())
+        whenever(repository.findAll()).thenReturn(TestUtils.buildRestaurantsModel())
 
         service.findAllRestaurants()
 
@@ -59,7 +59,7 @@ class RestaurantServiceTest {
 
     @Test
     fun `verify that when creating restaurant it should return create expected restaurant`() {
-        val restaurant = Restaurant("1", TestUtils.getDataList())
+        val restaurant = Restaurants("1", TestUtils.getDataList())
 
         service.saveRestaurant(restaurant)
 
@@ -69,7 +69,7 @@ class RestaurantServiceTest {
 
     @Test
     fun `verify that when deleting restaurant by id it should delete expected restaurant`() {
-        val restaurant = Restaurant("1", TestUtils.getDataList())
+        val restaurant = Restaurants("1", TestUtils.getDataList())
 
         restaurant.id?.let { service.deleteRestaurantsById(it) }
 
