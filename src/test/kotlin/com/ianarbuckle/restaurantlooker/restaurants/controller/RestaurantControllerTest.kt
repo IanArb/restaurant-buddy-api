@@ -56,7 +56,7 @@ class RestaurantControllerTest {
 
     @Test
     fun `verify that delete restaurant by id should delete expected restaurant`() {
-        whenever(service.deleteRestaurantsById("1")).thenReturn(TestUtils.buildRestaurantsModel())
+        whenever(service.deleteRestaurantsById("1")).thenReturn(TestUtils.createRestaurant())
 
         mockMvc.perform(delete("/restaurants" + "/{id}", 1)
                 .accept(MediaType.APPLICATION_JSON))
