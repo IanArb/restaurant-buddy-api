@@ -2,7 +2,6 @@ package com.ianarbuckle.restaurantlooker.restaurants.service
 
 import com.google.common.truth.Truth.assertThat
 import com.ianarbuckle.restaurantlooker.utils.TestUtils
-import com.ianarbuckle.restaurantlooker.restaurants.model.Restaurants
 import com.ianarbuckle.restaurantlooker.restaurants.repository.RestaurantRepository
 import org.junit.Before
 import org.junit.Test
@@ -53,27 +52,36 @@ class RestaurantServiceTest {
         verify(repository, times(1)).findAll()
         verifyNoMoreInteractions(repository)
 
-        assertThat(service.findAllRestaurants()[0].results).isNotEmpty()
-        assertThat(service.findAllRestaurants()[0].results.size).isEqualTo(8)
+        assertThat(service.findAllRestaurants()).isNotEmpty()
+        assertThat(service.findAllRestaurants().size).isEqualTo(1)
     }
 
     @Test
     fun `verify that when creating restaurant it should return create expected restaurant`() {
-        val restaurant = Restaurants("1", TestUtils.getDataList())
+        val restaurant = TestUtils.createRestaurant()
 
         service.saveRestaurant(restaurant)
 
         verify(repository, times(1)).save(any())
-        verifyNoMoreInteractions(repository)
     }
 
     @Test
     fun `verify that when deleting restaurant by id it should delete expected restaurant`() {
-        val restaurant = Restaurants("1", TestUtils.getDataList())
+        val restaurant = TestUtils.createRestaurant()
 
         restaurant.id?.let { service.deleteRestaurantsById(it) }
 
-        verify(repository, times(1)).deleteRestaurantById(anyString())
-        verifyNoMoreInteractions(repository)
+        verify(repository, times(1)).delete(any())
+    }
+
+    @Test
+    fun `verify that restaurant is updated and is not empty or null`() {
+        val restaurant = TestUtils.createRestaurant()
+
+        service.updateRestaurant(restaurant)
+
+        assertThat(restaurant).isNotNull()
+
+        verify(repository, times(1)).save(any())
     }
 }

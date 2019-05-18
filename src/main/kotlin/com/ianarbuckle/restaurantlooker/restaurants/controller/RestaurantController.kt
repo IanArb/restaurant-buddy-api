@@ -1,6 +1,6 @@
 package com.ianarbuckle.restaurantlooker.restaurants.controller
 
-import com.ianarbuckle.restaurantlooker.restaurants.model.Restaurants
+import com.ianarbuckle.restaurantlooker.restaurants.model.Restaurant
 import com.ianarbuckle.restaurantlooker.restaurants.service.RestaurantService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -18,18 +18,18 @@ class RestaurantController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun saveRestaurant(@RequestBody restaurant: Restaurants) = service.saveRestaurant(restaurant)
+    fun saveRestaurant(@RequestBody restaurant: Restaurant) = service.saveRestaurant(restaurant)
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    fun retrieveRestaurants(): MutableList<Restaurants> = service.findAllRestaurants()
+    fun retrieveRestaurants(): MutableList<Restaurant> = service.findAllRestaurants()
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
-    fun deleteRestaurants(@PathVariable id: String): MutableList<Restaurants> = service.deleteRestaurantsById(id)
+    fun deleteRestaurants(@PathVariable id: String): Restaurant = service.deleteRestaurantsById(id)
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    fun updateRestaurants(@RequestBody restaurant: Restaurants) = service.updateRestaurant(restaurant)
+    fun updateRestaurants(@RequestBody restaurant: Restaurant) = service.updateRestaurant(restaurant)
 
 }
