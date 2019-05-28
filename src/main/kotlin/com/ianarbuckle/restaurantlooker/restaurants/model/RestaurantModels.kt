@@ -11,13 +11,10 @@ import org.springframework.data.mongodb.core.mapping.Document
 
 @Document
 data class Restaurant(@Id val id: String?, val restaurantName: String?, val description: String?, val county: String?, val street: String?,
-                      val address: String?, val location: Location?, val status: String?, val menu: Menu?, val imageUrl: String?)
+                      val address: String?, val location: Location?, val status: String?, val dishes: MutableList<Dish>?, val imageUrl: String?)
 
 @Document
 data class Location(val latitude: Float, val longitude: Float)
-
-@Document
-data class Menu(val dishes: MutableList<Dish>)
 
 @Document
 data class Dish(val courseType: String, val dishName: String, val description: String, val price: Price)

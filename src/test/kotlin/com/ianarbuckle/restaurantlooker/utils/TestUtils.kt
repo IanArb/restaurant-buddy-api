@@ -25,7 +25,7 @@ object TestUtils {
 
     fun createRestaurant(): Restaurant {
         return Restaurant("1", "Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                Location(0.5f, 0.10f), "OPEN", Menu(createMenu()), "")
+                Location(0.5f, 0.10f), "OPEN", createMenu(), "")
     }
 
     private fun createMenu(): MutableList<Dish> {
