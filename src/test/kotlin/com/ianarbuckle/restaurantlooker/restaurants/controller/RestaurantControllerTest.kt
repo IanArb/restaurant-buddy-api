@@ -72,12 +72,12 @@ class RestaurantControllerTest {
         whenever(service.findAllRestaurants()).thenReturn(TestUtils.buildRestaurantsModel())
 
         mockMvc.perform(post("/restaurants", 1)
-                .content(TestUtils.asJsonString(TestUtils.buildRestaurantsModel()[0]))
+                .content(TestUtils.asJsonString(TestUtils.createRestaurant()))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated)
 
-        verify(service).saveRestaurant(TestUtils.buildRestaurantsModel()[0])
+        verify(service).saveRestaurant(TestUtils.createRestaurant())
         verifyNoMoreInteractions(service)
     }
 
@@ -86,12 +86,12 @@ class RestaurantControllerTest {
         whenever(service.findAllRestaurants()).thenReturn(TestUtils.buildRestaurantsModel())
 
         mockMvc.perform(put("/restaurants", 1)
-                .content(TestUtils.asJsonString(TestUtils.buildRestaurantsModel()[0]))
+                .content(TestUtils.asJsonString(TestUtils.createRestaurant()))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk)
 
-        verify(service).updateRestaurant(TestUtils.buildRestaurantsModel()[0])
+        verify(service).updateRestaurant(TestUtils.createRestaurant())
         verifyNoMoreInteractions(service)
     }
 

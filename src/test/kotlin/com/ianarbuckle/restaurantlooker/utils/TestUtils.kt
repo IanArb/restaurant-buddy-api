@@ -6,6 +6,7 @@ import com.fasterxml.jackson.datatype.joda.JodaModule
 import com.ianarbuckle.restaurantlooker.booking.model.*
 import com.ianarbuckle.restaurantlooker.restaurants.model.*
 import org.joda.time.DateTime
+import java.time.LocalDateTime
 
 
 /**
@@ -24,7 +25,8 @@ object TestUtils {
     }
 
     fun createRestaurant(): Restaurant {
-        return Restaurant("1", "Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
+        val dateTime = DateTime("2019-05-07T15:48:35.095Z").toLocalDateTime()
+        return Restaurant("1", dateTime,  "Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
                 Location(0.5f, 0.10f), "OPEN", createMenu(), "")
     }
 
