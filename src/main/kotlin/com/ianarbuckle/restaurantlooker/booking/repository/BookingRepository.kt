@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository
  * @author ianarbuckle on 07/05/2019.
  */
 @Repository
-interface BookingRepository: MongoRepository<Booking, String> {
+interface BookingRepository : MongoRepository<Booking, String> {
     @Query("{'owner.uuid': ?0}")
     fun findBookingsByUUID(uuid: String): MutableList<Booking>
     fun findBookingById(id: String): Booking
