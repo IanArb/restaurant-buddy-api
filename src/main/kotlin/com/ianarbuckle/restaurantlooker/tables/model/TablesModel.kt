@@ -1,18 +1,19 @@
-package com.ianarbuckle.restaurantlooker.booking.model
+package com.ianarbuckle.restaurantlooker.tables.model
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
 /**
- * @author ianarbuckle on 07/05/2019.
- *
+ * @author ianarbuckle on 17/07/2019.
  */
+@Document
+data class Tables(@Id val restaurantId: String?, val restaurantName: String?, val row: MutableList<Row>?)
 
 @Document
-data class Booking(@Id val id: String? = null, val owner: Owner?, val restaurantName: String?, val table: Table?)
+data class Row(val column: MutableList<Column>)
 
 @Document
-data class Owner(val uuid: String, val name: String, val phoneNumber: Int, val dietaryRequirements: Boolean, val arrivalTime: String)
+data class Column(val table: Table)
 
 @Document
 data class Table(val tableNumber: String, val status: String, val characteristics: TableCharacteristics)

@@ -5,8 +5,10 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.joda.JodaModule
 import com.ianarbuckle.restaurantlooker.booking.model.*
 import com.ianarbuckle.restaurantlooker.restaurants.model.*
+import com.ianarbuckle.restaurantlooker.tables.model.Column
+import com.ianarbuckle.restaurantlooker.tables.model.Row
+import com.ianarbuckle.restaurantlooker.tables.model.Tables
 import org.joda.time.DateTime
-import java.time.LocalDateTime
 
 
 /**
@@ -50,7 +52,20 @@ object TestUtils {
 
     fun createBooking(): Booking {
         val dateTime = DateTime("2019-05-07T15:48:35.095Z").toLocalDateTime()
-        return Booking("1", Owner("24345-34534-34534", "John Doe", 10998980), "Crillios", Table("FAMILY", 4, true, true, dateTime))
+        return Booking("1", Owner("24345-34534-34534", "John Doe", 10998980, false, dateTime.toString()), "Crillios", Table("14", "RESERVED", TableCharacteristics("FAMILY", 8, true)))
+    }
+
+    fun createTables(): Tables {
+        val rows = ArrayList<Row>()
+        val columns = ArrayList<Column>()
+        val table = com.ianarbuckle.restaurantlooker.tables.model.Table("1", "AVAILABLE", com.ianarbuckle.restaurantlooker.tables.model.TableCharacteristics("FAMILY", 4, false))
+        val column = Column(table)
+        val row = Row(columns)
+
+        columns.add(column)
+        rows.add(row)
+
+        return Tables("1", "Buckle's", rows)
     }
 
     fun asJsonString(obj: Any): String {
