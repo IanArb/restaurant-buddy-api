@@ -22,24 +22,28 @@ after_success:
 - docker tag $IMAGE_NAME:$COMMIT $IMAGE_NAME:$TAG
 - docker push $IMAGE_NAME
 deploy:
-- provider: s3
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
-  local_dir: build
-  skip_cleanup: true
-  on: &1
-    repo: IanArb/restaurant-buddy-api
-    branch: master
-  bucket: ian-arbuckle-restaurant-looker
-  region: eu-west-1
-- provider: codedeploy
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
-  bucket: ian-arbuckle-restaurant-looker
-  key: restaurant-looker-SNAPSHOT-0.0.1.jar
-  bundle_type: zip
-  application: RestaurantLooker
-  deployment_group: spring-boot-apps
-  region: eu-west-1
-  on: *1
-  wait-until-deployed: true
+  - provider: s3
+    access_key_id:
+      secure: ZTE6XSbQJZKx8Lj6QEE5q+vEFSwmavvGcUQu3Hftmt0+/Ncnfz925SjiyQvX7dVKOV+3gg7sm+39QyOb1RhCUDjBXRVlyODY8HDNquBtjbKJ0Rs+oapFKjBJV4QL51O5ygZvn9d6WB9AxUrPgoYppbJMxftBZVtj4ovfuJ/Qqjb4hdfROL/556W8rmv2uHM7PuduJWc+KDqfuSvIHzcI8N4cOeVVbmV240fKRh+K+sqhi+WcbTBniyz/hSD6cCY0rFlcLrCLvkkMZLQDG9alqR4x9Cfbqf2BzpT0ps1DfQUeQ+j0Gnx0GW5eKKDFM1/KFX/va/d84Q7+qJqxD7ZtCXttDFx0qXmq1knVdG80knGqn6CV4A5qEBK3VW/lW7VMsrvLxiE3lrp0bgdz+rmaqqzePfHfI1GlLn8+WBrgAyGipXwNNhC/iIEkkK0BwxB01HnJnRvvLM2RAQVPRODGd9NnsqOUhN2mNLpu6xGSeoQKXW0fdIZysvTKg2VBOUlKolMhINDVgxk1RoJrI8lI44cQESV9Lsf+5Z6TSDfCSL0jZuw1m5GnNRtA5GOwEZuonbOR4XB3sQPiR3g6N3CTHJJuN7kpsSCkSwhryjX3douzoJj5hlAc7w5t9iv6F0iesOOzOXfgbybPfvvy+5qifTSinBS6RoJvIISnuBEhrlg=
+    secret_access_key:
+      secure: fsryvikmMtOt76LLSeI+ZTrs6VkMlTNtJR5e273bFx3iTTKAAlqf6Rk5tvbX3cAzLR7kVMwRUMRytOyFZ8OrB4WVW7/EeXkN1NZOquezM91z5/NdUaWkTKAQFaoQLxrHNfmB8j29uuHrcuaSgXyNsJNR3SWbtbLIMEVfE+jeyNbiO3UUgMnffX/Z3z+c8o5a5NHRcnKDbFgwVe/XWS5nKeqZWyFLqQtJM/Lm4hcI6HTD97lEYUDS19ykMUeEwjmfdRjXa7aXQIKJ7Lhcdc4rTX7HR/xS/Lm53Ie90ueQ6JrywkvkzDSzlSE9tORF0DHAhtNoqz56uqN+qJJZBaWMcVBMPHQ6ml1tpRGZ5p3Fxsevmb3nU/GKGvFrmd93OCEwx9Yp8WihgodDy7XEtWc0l4wjP5WKGi4SI1Xx3VI8/rvtKEJmrvuKQ3aLFS/BEhtZBp4P21F3CpSA1bG8aIpMcFJDE9JP7Jktd2KKQ0YRCcPI/V4nQrwfH0Mx8rdf7Ju/QHJ7uUFOIsmgiY33isA7BxKU5i5unlRXpBw0gFLJR82vhnr1tBMCw1A66OU+V/4LPtpLGkkiCTwjIeqEab8MzhRenlHhIgrUZppjydn8M/wJsJz4JB5lh5llfjZi/oYhpiIUvRL9Ka1fcZ2LzkH//aslswYdpO3xnfCNeiSpqAA=
+    local_dir: build
+    skip_cleanup: true
+    on: &1
+      repo: IanArb/restaurant-buddy-api
+      branch: master
+    bucket: ian-arbuckle-restaurant-looker
+    region: eu-west-1
+  - provider: codedeploy
+    access_key_id:
+      secure: ZTE6XSbQJZKx8Lj6QEE5q+vEFSwmavvGcUQu3Hftmt0+/Ncnfz925SjiyQvX7dVKOV+3gg7sm+39QyOb1RhCUDjBXRVlyODY8HDNquBtjbKJ0Rs+oapFKjBJV4QL51O5ygZvn9d6WB9AxUrPgoYppbJMxftBZVtj4ovfuJ/Qqjb4hdfROL/556W8rmv2uHM7PuduJWc+KDqfuSvIHzcI8N4cOeVVbmV240fKRh+K+sqhi+WcbTBniyz/hSD6cCY0rFlcLrCLvkkMZLQDG9alqR4x9Cfbqf2BzpT0ps1DfQUeQ+j0Gnx0GW5eKKDFM1/KFX/va/d84Q7+qJqxD7ZtCXttDFx0qXmq1knVdG80knGqn6CV4A5qEBK3VW/lW7VMsrvLxiE3lrp0bgdz+rmaqqzePfHfI1GlLn8+WBrgAyGipXwNNhC/iIEkkK0BwxB01HnJnRvvLM2RAQVPRODGd9NnsqOUhN2mNLpu6xGSeoQKXW0fdIZysvTKg2VBOUlKolMhINDVgxk1RoJrI8lI44cQESV9Lsf+5Z6TSDfCSL0jZuw1m5GnNRtA5GOwEZuonbOR4XB3sQPiR3g6N3CTHJJuN7kpsSCkSwhryjX3douzoJj5hlAc7w5t9iv6F0iesOOzOXfgbybPfvvy+5qifTSinBS6RoJvIISnuBEhrlg=
+    secret_access_key:
+      secure: fsryvikmMtOt76LLSeI+ZTrs6VkMlTNtJR5e273bFx3iTTKAAlqf6Rk5tvbX3cAzLR7kVMwRUMRytOyFZ8OrB4WVW7/EeXkN1NZOquezM91z5/NdUaWkTKAQFaoQLxrHNfmB8j29uuHrcuaSgXyNsJNR3SWbtbLIMEVfE+jeyNbiO3UUgMnffX/Z3z+c8o5a5NHRcnKDbFgwVe/XWS5nKeqZWyFLqQtJM/Lm4hcI6HTD97lEYUDS19ykMUeEwjmfdRjXa7aXQIKJ7Lhcdc4rTX7HR/xS/Lm53Ie90ueQ6JrywkvkzDSzlSE9tORF0DHAhtNoqz56uqN+qJJZBaWMcVBMPHQ6ml1tpRGZ5p3Fxsevmb3nU/GKGvFrmd93OCEwx9Yp8WihgodDy7XEtWc0l4wjP5WKGi4SI1Xx3VI8/rvtKEJmrvuKQ3aLFS/BEhtZBp4P21F3CpSA1bG8aIpMcFJDE9JP7Jktd2KKQ0YRCcPI/V4nQrwfH0Mx8rdf7Ju/QHJ7uUFOIsmgiY33isA7BxKU5i5unlRXpBw0gFLJR82vhnr1tBMCw1A66OU+V/4LPtpLGkkiCTwjIeqEab8MzhRenlHhIgrUZppjydn8M/wJsJz4JB5lh5llfjZi/oYhpiIUvRL9Ka1fcZ2LzkH//aslswYdpO3xnfCNeiSpqAA=
+    bucket: ian-arbuckle-restaurant-looker
+    key: restaurant-looker-SNAPSHOT-0.0.1.jar
+    bundle_type: zip
+    application: RestaurantLooker
+    deployment_group: spring-boot-apps
+    region: eu-west-1
+    on: *1
+    wait-until-deployed: true
