@@ -47,4 +47,5 @@ deploy:
   wait-until-deployed: true
 
 before_install:
+  - chmod +x ecr_credentials.sh
   - ./ecr_credentials.sh
