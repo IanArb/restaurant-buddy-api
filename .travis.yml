@@ -25,7 +25,7 @@ deploy:
 - provider: s3
   access_key_id: "AKIAYUK2ULG7U7O3H6VJ"
   secret_access_key: "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"
-#  local_dir: build
+  local_dir: build
   skip_cleanup: true
   on: &1
     repo: IanArb/restaurant-buddy-api
