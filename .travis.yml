@@ -23,8 +23,8 @@ after_success:
 - docker push $IMAGE_NAME
 deploy:
 - provider: s3
-  access_key_id: "AKIAYUK2ULG7U7O3H6VJ"
-  secret_access_key: "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"
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
   local_dir: build
   skip_cleanup: true
   on: &1
@@ -33,8 +33,8 @@ deploy:
   bucket: ian-arbuckle-restaurant-looker
   region: eu-west-1
 - provider: codedeploy
-  access_key_id: "AKIAYUK2ULG7U7O3H6VJ"
-  secret_access_key: "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"
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
   bucket: ian-arbuckle-restaurant-looker
   key: restaurant-looker-SNAPSHOT-0.0.1.jar
   bundle_type: zip
