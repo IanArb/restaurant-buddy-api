@@ -35,9 +35,9 @@ deploy:
   region: eu-west-1
 - provider: codedeploy
   access_key_id:
-    secure: $AWS_ACCESS_KEY_ID
+    secure: "NhaOizNJzxU45ti6uTYQqrm0ZxmKm8queollbPCHylOPSmDVQjsvnMkn5j3pGpjyJqebsdmQktBlYI4vrB63cVoTnD1GF5RZiEan3S6T5pjd3DzZBcqzLfOzS0olTzwoyJ8G3wkvBq5CVc8i\+E\Xp03fRK1/uKclZqhKAxylpBQK54BMagxkM15IEEMpfcGI7mB6VeoDvtt6\/5\sCHUckwI\+C\qs1aCeapZqmClI\+D\Xpa3v\+6\qPnpiNUjEEf8S8\/x\VqJAOUYntpC3wueSwpfnjTvD1VXL7xb6DhRmJG7fXulWj\/6\JjoI3BzeXfoG1h\/5\FPZk6GrWVQIsuorkCVZiHQHTKTppOrQ6yfn9iAxk366R\/u\9vaXR3Az2Qtzh7JENoWgxkz5HKSLeLw8BLEJkYV8aZRf\+R\PuasDiJdMI0u5W\+n\N18hbXb1aR60b7ezSHissQ7vCKiu7oYzJFRXEEu8OE00LtX0GsIGl0Lagz6aQkItOqqHeiLy3sYsgDnGz4klZeRMjiVNHbmyroZ\+Y\8SoauYWU670xsXOAKVIvgfFEi\+v\TQm6CqBCYVUzF\+h\BvzE6tNTCQ0QE07Q5uTPvd2JE2lHDNXGHc5c1lipuxUH7h7GIvz\+M\BtaV87Q3Rqgha3L931vw1P\+p\5yXf\+V\7HmbfUPloDPZ87dj5w0rN2JUt\/m\k40HY="
   secret_access_key:
-    secure: $AWS_SECRET_KEY
+    secure: "eG492X\/c\Pq\/m\Ii\/L\YZpXzbNbqvmoaB6gZ8YgXo2O5OFdVcZQK2hEGOIwASkATM14VswfmlRpvslHF6ByRrCc4LubqkwFN1eIJWwPuFb7FCpgzlIW6hL151fSYAubZJEH4urHNbTTjCdGBA7ACip0pARRYqeNHg1oqQxbZS51OW0QdqgHXd7QrcvfLwXxGQJZUkgPOPICi\+3\Rt84g4sGdzcOPKme5NQTQqH6hCmr8xdAJC\/Z\59VgNm3fRxW2avDQMvUpHMpB1l\+/V\re4rLjL8QvqjhR7R0noDJYdHYMNWH\+m\WUT\/v\pBOFrf3GES3As7yKicA3000FjKgKsWutv95M\/A\YRNf9dMSoKDYXhQF0hobn8aZ\++1\gKA2cKu8hbrk2XOLZnwlrm4w89bt6AgJSq18II\/8\yzWwRhYBT\+t\fYJV4xv4s4WJ9F0tc5L\+S\apyiO0d\/y\OQwQ3b\/H\XJf66qghWjvG1pHxyivK4scuz27sBwAJRl\/+\8rFsyfDSUUQOkuSf\+i\v57IRB4q0vJkt78XiCgTD63Bb6sRMTYIADqywK79jk3XtBLOYKWF8amsO7sCyXIqtZpkHT0Vzrdl4akfIEBTzB4\+n\tUy81IRK76JC6HrSH1rwyVwgnluoBAJZRHXkWEk\/I\ebvMG6fBQLAjt0KgtB2jsjZzcmsU1rzEmJV99hwCE="
   bucket: ian-arbuckle-restaurant-looker
   key: restaurant-looker-SNAPSHOT-0.0.1.jar
   bundle_type: zip
