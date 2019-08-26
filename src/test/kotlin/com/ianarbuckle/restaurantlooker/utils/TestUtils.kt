@@ -3,8 +3,11 @@ package com.ianarbuckle.restaurantlooker.utils
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.joda.JodaModule
+import com.ianarbuckle.restaurantlooker.authentication.model.Authentication
+import com.ianarbuckle.restaurantlooker.authentication.model.User
 import com.ianarbuckle.restaurantlooker.booking.model.*
 import com.ianarbuckle.restaurantlooker.restaurants.model.*
+import com.ianarbuckle.restaurantlooker.restaurants.model.Location
 import com.ianarbuckle.restaurantlooker.tables.model.Column
 import com.ianarbuckle.restaurantlooker.tables.model.Row
 import com.ianarbuckle.restaurantlooker.tables.model.Tables
@@ -52,7 +55,8 @@ object TestUtils {
 
     fun createBooking(): Booking {
         val dateTime = DateTime("2019-05-07T15:48:35.095Z").toLocalDateTime()
-        return Booking("1", Owner("24345-34534-34534", "John Doe", 10998980, false, dateTime.toString()), "Crillios", Table("14", "RESERVED", TableCharacteristics("FAMILY", 8, true)))
+        val details = RestaurantDetails("Crillio's", "Lower Baggot Street", com.ianarbuckle.restaurantlooker.booking.model.Location(10.0f, 10.0f))
+        return Booking("1", Owner("24345-34534-34534", "John Doe", 10998980, false, dateTime.toString()), details, Table("14", "RESERVED", TableCharacteristics("FAMILY", 8, true)))
     }
 
     fun createTables(): Tables {
@@ -67,6 +71,8 @@ object TestUtils {
 
         return Tables("1", "Buckle's", rows)
     }
+
+    fun createUser(): Authentication = Authentication("124324-1242343-123121", User("GUEST", "joe.bloggs@mail.com", "234234-23423423"))
 
     fun asJsonString(obj: Any): String {
         try {

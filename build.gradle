@@ -79,6 +79,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     testImplementation "com.google.truth:truth:0.40"
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '2.10.0'
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0"
     implementation 'joda-time:joda-time:2.3'
     implementation('com.fasterxml.jackson.datatype:jackson-datatype-joda')
 }
