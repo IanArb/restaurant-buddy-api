@@ -10,7 +10,6 @@ env:
   - COMMIT=${TRAVIS_COMMIT::7}
 script:
 - ./gradlew clean test
-- ./gradlew jacocoFullReport
 services:
 - docker
 after_success:
