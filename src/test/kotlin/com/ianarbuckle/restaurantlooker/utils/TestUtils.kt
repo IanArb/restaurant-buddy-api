@@ -52,7 +52,7 @@ object TestUtils {
 
     fun createBooking(): Booking {
         val dateTime = DateTime("2019-05-07T15:48:35.095Z").toLocalDateTime()
-        return Booking("1", Owner("24345-34534-34534", "John Doe", 10998980, false, dateTime.toString()), "Crillios", Table("14", "RESERVED", TableCharacteristics("FAMILY", 8, true)))
+        return Booking("1", Owner("24345-34534-34534", "John Doe", "iarbuckle@mail.com",10998980, false, dateTime.toString(), "17:00"), "Crillios", Table("14", "RESERVED", TableCharacteristics("FAMILY", 8, true)))
     }
 
     fun createTables(): Tables {
