@@ -1,5 +1,6 @@
 package com.ianarbuckle.restaurantlooker.booking.model
 
+import com.ianarbuckle.restaurantlooker.restaurants.model.Location
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
@@ -9,7 +10,10 @@ import org.springframework.data.mongodb.core.mapping.Document
  */
 
 @Document
-data class Booking(@Id val id: String? = null, val owner: Owner?, val restaurantName: String?, val table: Table?)
+data class Booking(@Id val id: String? = null, val owner: Owner?, val restaurantDetails: RestaurantDetails?, val table: Table?)
+
+@Document
+data class RestaurantDetails(val name: String, val address: String, val location: Location)
 
 @Document
 data class Owner(val uuid: String, val name: String, val email: String, val phoneNumber: PhoneNumber, val dietaryRequirements: Boolean, val bookingDate: String, val arrivalTime: String)
