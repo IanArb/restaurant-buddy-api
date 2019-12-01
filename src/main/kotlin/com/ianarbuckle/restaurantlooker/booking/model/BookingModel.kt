@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 data class Booking(@Id val id: String? = null, val owner: Owner?, val restaurantDetails: RestaurantDetails?, val table: Table?)
 
 @Document
-data class RestaurantDetails(val name: String, val address: String, val location: Location)
+data class RestaurantDetails(val name: String, val imageUrl: String, val address: String, val location: Location)
 
 @Document
 data class Owner(val uuid: String, val name: String, val email: String, val phoneNumber: PhoneNumber, val dietaryRequirements: Boolean, val bookingDate: String, val arrivalTime: String)
