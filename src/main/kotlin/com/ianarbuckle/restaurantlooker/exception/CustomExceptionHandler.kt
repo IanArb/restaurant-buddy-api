@@ -36,8 +36,14 @@ class CustomExceptionHandler {
     }
 
     @ExceptionHandler(BadRequestException::class)
-    fun handleBadRequestException(exception: BadRequestException, request: WebRequest) :
+    fun handleBadRequestException(exception: BadRequestException, request: WebRequest):
             ResponseEntity<ErrorBody> {
+        val errorBody = exception.message?.let { ErrorBody(LocalDateTime(), it, request.getDescription(false)) }
+        return ResponseEntity(errorBody, HttpStatus.BAD_REQUEST)
+    }
+
+    @ExceptionHandler(UserNotFoundException::class)
+    fun handleUserNotFoundException(exception: BadRequestException, request: WebRequest): ResponseEntity<ErrorBody> {
         val errorBody = exception.message?.let { ErrorBody(LocalDateTime(), it, request.getDescription(false)) }
         return ResponseEntity(errorBody, HttpStatus.BAD_REQUEST)
     }

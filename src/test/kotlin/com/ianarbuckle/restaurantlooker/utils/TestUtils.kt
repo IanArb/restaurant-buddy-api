@@ -3,8 +3,12 @@ package com.ianarbuckle.restaurantlooker.utils
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.joda.JodaModule
+import com.ianarbuckle.restaurantlooker.authentication.model.AuthBody
 import com.ianarbuckle.restaurantlooker.booking.model.*
-import com.ianarbuckle.restaurantlooker.restaurants.model.*
+import com.ianarbuckle.restaurantlooker.restaurants.model.Dish
+import com.ianarbuckle.restaurantlooker.restaurants.model.Location
+import com.ianarbuckle.restaurantlooker.restaurants.model.Price
+import com.ianarbuckle.restaurantlooker.restaurants.model.Restaurant
 import com.ianarbuckle.restaurantlooker.tables.model.Column
 import com.ianarbuckle.restaurantlooker.tables.model.Row
 import com.ianarbuckle.restaurantlooker.tables.model.Tables
@@ -69,6 +73,10 @@ object TestUtils {
 
         return Tables("1", "Buckle's", rows)
     }
+
+    fun createAuthUser(): AuthBody = AuthBody("ian@mail.com", "password", false)
+
+    fun createUser(): AuthBody = AuthBody("ian.arbuckle@mail.com", "password", false)
 
     fun asJsonString(obj: Any): String {
         try {

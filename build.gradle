@@ -72,6 +72,9 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-actuator')
     implementation('org.springframework.boot:spring-boot-starter-data-mongodb')
     implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.springframework.boot:spring-boot-starter-security')
+    implementation('io.jsonwebtoken:jjwt:0.9.1')
+
     implementation('com.fasterxml.jackson.module:jackson-module-kotlin')
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -79,4 +82,7 @@ dependencies {
     testImplementation "com.google.truth:truth:0.40"
     implementation 'joda-time:joda-time:2.3'
     implementation('com.fasterxml.jackson.datatype:jackson-datatype-joda')
+    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
+    implementation "jakarta.xml.bind:jakarta.xml.bind-api:2.3.2"
+    implementation "org.glassfish.jaxb:jaxb-runtime:2.3.2"
 }
