@@ -16,4 +16,7 @@ class DuplicateItemException : RuntimeException()
 class BadRequestException : RuntimeException()
 
 @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Internal server error")
-class InternalServerErrorException : RuntimeException()
+class InternalServerErrorException() : RuntimeException()
+
+@ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "User not found")
+class UserNotFoundException() : RuntimeException()
