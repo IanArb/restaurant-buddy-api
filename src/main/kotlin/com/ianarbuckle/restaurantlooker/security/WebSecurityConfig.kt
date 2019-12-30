@@ -35,7 +35,9 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity) {
         http.httpBasic().disable().csrf().disable().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-                .antMatchers("/authentication/login").permitAll().antMatchers("/authentication/register").permitAll()
+                .antMatchers("/authentication/login").permitAll()
+                .antMatchers("/authentication/register").permitAll()
+                .antMatchers("/authentication/retrieveUser").permitAll()
                 .antMatchers("/booking/**").hasAnyAuthority().anyRequest().authenticated()
                 .antMatchers("/restaurants/**").hasAnyAuthority().anyRequest().authenticated()
                 .antMatchers("/tables/**").hasAnyAuthority().anyRequest().authenticated()
