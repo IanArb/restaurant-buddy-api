@@ -22,8 +22,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.collections.Set
-import kotlin.collections.listOf
 
 /**
  * @author ianarbuckle on 26/09/2019.
@@ -93,5 +91,25 @@ class UserControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk)
+    }
+
+    @Test
+    fun `verify that retrieving user is not empty or null`() {
+        val userRole = Role("1", "ADMIN")
+        val roles = HashSet<Role>(listOf(userRole))
+        val user = User("1", "ian", "ian@mail.com", "password", true, roles as Set<Role>?)
+
+        val users = ArrayList<User>()
+        users.add(user)
+
+        whenever(userService.findAll()).thenReturn(users)
+        whenever(userService.findUserByEmail("ian@mail.com")).thenReturn(user)
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/authentication/retrieveUser?email=ian@mail.com", 1)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk)
+
+        verify(userService, times(1)).findUserByEmail("ian@mail.com")
     }
 }
