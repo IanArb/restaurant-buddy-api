@@ -3,6 +3,7 @@ package com.ianarbuckle.restaurantlooker.authentication.controller
 import com.ianarbuckle.restaurantlooker.authentication.model.AuthBody
 import com.ianarbuckle.restaurantlooker.authentication.model.User
 import com.ianarbuckle.restaurantlooker.authentication.service.CustomUserDetailsService
+import com.ianarbuckle.restaurantlooker.exception.UserNotFoundException
 import com.ianarbuckle.restaurantlooker.security.JwtTokenProvider
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -65,6 +66,13 @@ class UserController {
     }
 
     @GetMapping("/retrieveUser")
-    fun retrieveUser(@RequestParam email: String): User? = userService.findUserByEmail(email)
+    fun retrieveUser(@RequestParam email: String): User? {
+        userService.findAll().forEach {
+            if (it.email != email) {
+                throw UserNotFoundException()
+            }
+        }
+        return userService.findUserByEmail(email)
+    }
 
 }
