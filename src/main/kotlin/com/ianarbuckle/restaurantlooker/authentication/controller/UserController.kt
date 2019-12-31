@@ -67,12 +67,15 @@ class UserController {
 
     @GetMapping("/retrieveUser")
     fun retrieveUser(@RequestParam email: String): User? {
-        userService.findAll().forEach {
-            if (it.email != email) {
-                throw UserNotFoundException()
-            }
+        val users = userService.findAll()
+
+        val user = users.find { it.email == email }
+
+        if (users.contains(user)) {
+            return userService.findUserByEmail(email)
+        } else {
+            throw UserNotFoundException()
         }
-        return userService.findUserByEmail(email)
     }
 
 }
