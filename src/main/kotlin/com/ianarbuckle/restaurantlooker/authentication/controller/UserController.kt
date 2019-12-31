@@ -35,14 +35,14 @@ class UserController {
     fun login(@RequestBody data: AuthBody): ResponseEntity<*> {
         try {
             val username = data.email
-            val model = HashMap<Any, Any>()
+            val model = HashMap<Any, Any?>()
             authenticationManager.authenticate(UsernamePasswordAuthenticationToken(username, data.password))
             if (data.isRefresh) {
-                val refreshToken = jwtTokenTokenProvider.createRefreshToken(username, userService.findUserByEmail(username)?.roles!!)
+                val refreshToken = userService.findUserByEmail(username)?.roles?.let { jwtTokenTokenProvider.createRefreshToken(username, it) }
                 model["username"] = username
                 model["token"] = refreshToken
             } else {
-                val token = jwtTokenTokenProvider.createToken(username, userService.findUserByEmail(username)?.roles!!)
+                val token = userService.findUserByEmail(username)?.roles?.let { jwtTokenTokenProvider.createToken(username, it) }
                 model["username"] = username
                 model["token"] = token
             }
