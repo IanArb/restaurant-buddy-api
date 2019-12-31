@@ -36,11 +36,10 @@ class CustomUserDetailsService : UserDetailsService {
     fun findAll(): List<User> = userRepository.findAll()
 
     fun saveUser(user: User) {
-        roleRepository.save(Role(role = "ADMIN"))
+        val roles = user.roles
+        roles?.first()?.let { roleRepository.save(it) }
         user.password = passwordEncoder.encode(user.password)
         user.isEnabled = true
-        val userRole = Role(role = "ADMIN")
-        user.roles = HashSet<Role>(listOf(userRole))
         userRepository.save(user)
     }
 

@@ -3,6 +3,7 @@ package com.ianarbuckle.restaurantlooker.authentication.controller
 import com.ianarbuckle.restaurantlooker.authentication.model.AuthBody
 import com.ianarbuckle.restaurantlooker.authentication.model.User
 import com.ianarbuckle.restaurantlooker.authentication.service.CustomUserDetailsService
+import com.ianarbuckle.restaurantlooker.exception.UserNotFoundException
 import com.ianarbuckle.restaurantlooker.security.JwtTokenProvider
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -34,14 +35,14 @@ class UserController {
     fun login(@RequestBody data: AuthBody): ResponseEntity<*> {
         try {
             val username = data.email
-            val model = HashMap<Any, Any>()
+            val model = HashMap<Any, Any?>()
             authenticationManager.authenticate(UsernamePasswordAuthenticationToken(username, data.password))
             if (data.isRefresh) {
-                val refreshToken = jwtTokenTokenProvider.createRefreshToken(username, userService.findUserByEmail(username)?.roles!!)
+                val refreshToken = userService.findUserByEmail(username)?.roles?.let { jwtTokenTokenProvider.createRefreshToken(username, it) }
                 model["username"] = username
                 model["token"] = refreshToken
             } else {
-                val token = jwtTokenTokenProvider.createToken(username, userService.findUserByEmail(username)?.roles!!)
+                val token = userService.findUserByEmail(username)?.roles?.let { jwtTokenTokenProvider.createToken(username, it) }
                 model["username"] = username
                 model["token"] = token
             }
@@ -65,6 +66,16 @@ class UserController {
     }
 
     @GetMapping("/retrieveUser")
-    fun retrieveUser(@RequestParam email: String): User? = userService.findUserByEmail(email)
+    fun retrieveUser(@RequestParam email: String): User? {
+        val users = userService.findAll()
+
+        val user = users.find { it.email == email }
+
+        if (users.contains(user)) {
+            return userService.findUserByEmail(email)
+        } else {
+            throw UserNotFoundException()
+        }
+    }
 
 }

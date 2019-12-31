@@ -18,5 +18,5 @@ class BadRequestException : RuntimeException()
 @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Internal server error")
 class InternalServerErrorException() : RuntimeException()
 
-@ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "User not found")
+@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "User not found")
 class UserNotFoundException() : RuntimeException()
