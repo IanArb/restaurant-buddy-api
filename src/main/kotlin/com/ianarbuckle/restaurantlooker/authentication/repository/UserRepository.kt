@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository
  */
 @Repository
 interface UserRepository : MongoRepository<User, String> {
-    fun findByEmail(email: String): User
+    fun findByUuid(uuid: String): User
 }
