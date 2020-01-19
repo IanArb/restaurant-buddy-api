@@ -74,9 +74,9 @@ object TestUtils {
         return Tables("1", "Buckle's", rows)
     }
 
-    fun createAuthUser(): AuthBody = AuthBody("ian@mail.com", "password", false)
+    fun createAuthUser(): AuthBody = AuthBody("1234-1234-1234-1234", "ian@mail.com", "password", false)
 
-    fun createUser(): AuthBody = AuthBody("ian.arbuckle@mail.com", "password", false)
+    fun createUser(): AuthBody = AuthBody("1234-1234-1234-1234", "ian.arbuckle@mail.com", "password", false)
 
     fun asJsonString(obj: Any): String {
         try {

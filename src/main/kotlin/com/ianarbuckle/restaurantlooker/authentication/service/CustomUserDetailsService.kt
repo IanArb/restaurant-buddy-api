@@ -29,8 +29,8 @@ class CustomUserDetailsService : UserDetailsService {
     @Autowired
     lateinit var passwordEncoder: PasswordEncoder
 
-    fun findUserByEmail(email: String): User? {
-        return userRepository.findByEmail(email)
+    fun findUserByUuid(uuid: String): User? {
+        return userRepository.findByUuid(uuid)
     }
 
     fun findAll(): List<User> = userRepository.findAll()
@@ -44,10 +44,10 @@ class CustomUserDetailsService : UserDetailsService {
     }
 
     @Throws(UsernameNotFoundException::class)
-    override fun loadUserByUsername(email: String): UserDetails {
-        val user = userRepository.findByEmail(email)
-        val authorities = getUserAuthority(user.roles!!)
-        return buildUserForAuthentication(user, authorities)
+    override fun loadUserByUsername(uuid: String): UserDetails? {
+        val user = userRepository.findByUuid(uuid)
+        val authorities = user.roles?.let { getUserAuthority(it) }
+        return authorities?.let { buildUserForAuthentication(user, it) }
     }
 
     private fun getUserAuthority(userRoles: Set<Role>): List<GrantedAuthority> {

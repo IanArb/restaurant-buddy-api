@@ -53,13 +53,13 @@ class UserControllerTest {
     fun `verify when user log ins then it should token`() {
         val userRole = Role("1", "ADMIN")
         val roles = HashSet<Role>(listOf(userRole))
-        val user = User("1", "ian", "ian@mail.com", "password", true, roles as Set<Role>?)
+        val user = User("1", "1234-1234-1234-1234", "ian", "ian@mail.com", "password", true, roles)
 
         val users = ArrayList<User>()
         users.add(user)
 
         whenever(userService.findAll()).thenReturn(users)
-        whenever(userService.findUserByEmail("ian@mail.com")).thenReturn(user)
+        whenever(userService.findUserByUuid("ian@mail.com")).thenReturn(user)
         whenever(jwtTokenProvider.createToken(anyString(), anySet())).thenReturn("1234566")
         whenever(authenticationManager.authenticate(any())).thenReturn(UsernamePasswordAuthenticationToken("ian", "passowrd"))
 
@@ -69,7 +69,7 @@ class UserControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk)
 
-        verify(userService, times(1)).findUserByEmail(anyString())
+        verify(userService, times(1)).findUserByUuid(anyString())
 
         verifyNoMoreInteractions(userService)
     }
@@ -78,13 +78,13 @@ class UserControllerTest {
     fun `verify when user registers then it should create username and email profile`() {
         val userRole = Role("1", "ADMIN")
         val roles = HashSet<Role>(listOf(userRole))
-        val user = User("1", "ian", "ian@mail.com", "password", true, roles as Set<Role>?)
+        val user = User("1", "1234-1234-1234-1234", "ian", "ian@mail.com", "password", true, roles)
 
         val users = ArrayList<User>()
         users.add(user)
 
         whenever(userService.findAll()).thenReturn(users)
-        whenever(userService.findUserByEmail("ian@mail.com")).thenReturn(user)
+        whenever(userService.findUserByUuid("ian@mail.com")).thenReturn(user)
 
         mockMvc.perform(MockMvcRequestBuilders.post("/authentication/register", 1)
                 .content(TestUtils.asJsonString(TestUtils.createUser()))
@@ -97,19 +97,19 @@ class UserControllerTest {
     fun `verify that retrieving user is not empty or null`() {
         val userRole = Role("1", "ADMIN")
         val roles = HashSet<Role>(listOf(userRole))
-        val user = User("1", "ian", "ian@mail.com", "password", true, roles as Set<Role>?)
+        val user = User("1", "1234-1234-1234-1234", "ian", "ian@mail.com", "password", true, roles)
 
         val users = ArrayList<User>()
         users.add(user)
 
         whenever(userService.findAll()).thenReturn(users)
-        whenever(userService.findUserByEmail("ian@mail.com")).thenReturn(user)
+        whenever(userService.findUserByUuid("ian@mail.com")).thenReturn(user)
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/authentication/retrieveUser?email=ian@mail.com", 1)
+        mockMvc.perform(MockMvcRequestBuilders.get("/authentication/retrieveUser?uuid=1234-1234-1234-1234", 1)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk)
 
-        verify(userService, times(1)).findUserByEmail("ian@mail.com")
+        verify(userService, times(1)).findUserByUuid("1234-1234-1234-1234")
     }
 }

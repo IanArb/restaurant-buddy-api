@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document
  */
 @Document
 data class User(@Id val id: String? = null,
+                val uuid: String? = null,
                 val username: String? = null,
                 val email: String? = null,
                 var password: String? = null,
@@ -17,4 +18,4 @@ data class User(@Id val id: String? = null,
 @Document
 data class Role(@Id val id: String? = null, var role: String? = null)
 
-data class AuthBody(val email: String, val password: String, val isRefresh: Boolean)
+data class AuthBody(val uuid: String, val email: String, val password: String, val isRefresh: Boolean)

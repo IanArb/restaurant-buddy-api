@@ -38,16 +38,16 @@ class JwtTokenProvider {
         secretKey = getEncoder().encodeToString(secretKey.toByteArray())
     }
 
-    fun createToken(username: String, set: Set<Role>): String {
-        val claims = Jwts.claims().setSubject(username)
+    fun createToken(uuid: String, set: Set<Role>): String {
+        val claims = Jwts.claims().setSubject(uuid)
         claims["roles"] = set
         val now = Date()
         val validity = Date(validityInMilliseconds)
         return buildJwtToken(claims, now, validity)
     }
 
-    fun createRefreshToken(username: String, set: Set<Role>): String {
-        val claims = Jwts.claims().setSubject(username)
+    fun createRefreshToken(uuid: String, set: Set<Role>): String {
+        val claims = Jwts.claims().setSubject(uuid)
         claims["roles"] = set
         val now = Date()
         val validity = Date(refreshValidityInMilliseconds)
@@ -65,7 +65,7 @@ class JwtTokenProvider {
 
     fun getAuthentication(token: String): Authentication {
         val userDetails = this.userDetailsService.loadUserByUsername(getUsername(token))
-        return UsernamePasswordAuthenticationToken(userDetails, "", userDetails.authorities)
+        return UsernamePasswordAuthenticationToken(userDetails, "", userDetails?.authorities)
     }
 
     fun getUsername(token: String): String {

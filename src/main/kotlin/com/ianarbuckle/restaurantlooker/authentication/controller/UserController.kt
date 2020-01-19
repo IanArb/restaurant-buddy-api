@@ -34,16 +34,16 @@ class UserController {
     @PostMapping("/login")
     fun login(@RequestBody data: AuthBody): ResponseEntity<*> {
         try {
-            val username = data.email
+            val uuid = data.uuid
             val model = HashMap<Any, Any?>()
-            authenticationManager.authenticate(UsernamePasswordAuthenticationToken(username, data.password))
+            authenticationManager.authenticate(UsernamePasswordAuthenticationToken(uuid, data.password))
             if (data.isRefresh) {
-                val refreshToken = userService.findUserByEmail(username)?.roles?.let { jwtTokenTokenProvider.createRefreshToken(username, it) }
-                model["username"] = username
+                val refreshToken = userService.findUserByUuid(uuid)?.roles?.let { jwtTokenTokenProvider.createRefreshToken(uuid, it) }
+                model["uuid"] = uuid
                 model["token"] = refreshToken
             } else {
-                val token = userService.findUserByEmail(username)?.roles?.let { jwtTokenTokenProvider.createToken(username, it) }
-                model["username"] = username
+                val token = userService.findUserByUuid(uuid)?.roles?.let { jwtTokenTokenProvider.createToken(uuid, it) }
+                model["uuid"] = uuid
                 model["token"] = token
             }
             return ok(model)
@@ -66,13 +66,13 @@ class UserController {
     }
 
     @GetMapping("/retrieveUser")
-    fun retrieveUser(@RequestParam email: String): User? {
+    fun retrieveUser(@RequestParam uuid: String): User? {
         val users = userService.findAll()
 
-        val user = users.find { it.email == email }
+        val user = users.find { it.uuid == uuid }
 
         if (users.contains(user)) {
-            return userService.findUserByEmail(email)
+            return userService.findUserByUuid(uuid)
         } else {
             throw UserNotFoundException()
         }
