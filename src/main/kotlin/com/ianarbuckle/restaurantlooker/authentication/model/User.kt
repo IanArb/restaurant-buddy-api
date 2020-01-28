@@ -18,4 +18,7 @@ data class User(@Id val id: String? = null,
 @Document
 data class Role(@Id val id: String? = null, var role: String? = null)
 
-data class AuthBody(val uuid: String, val email: String, val password: String, val isRefresh: Boolean)
+data class AuthBody(val uuid: String,
+                    val email: String,
+                    val password: String,
+                    val isRefresh: Boolean)

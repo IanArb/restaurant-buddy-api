@@ -1,7 +1,7 @@
 buildscript {
     ext {
-        kotlinVersion = '1.3.41'
-        springBootVersion = '2.1.7.RELEASE'
+        kotlinVersion = '1.3.61'
+        springBootVersion = '2.1.3.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -85,4 +85,8 @@ dependencies {
     testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
     implementation "jakarta.xml.bind:jakarta.xml.bind-api:2.3.2"
     implementation "org.glassfish.jaxb:jaxb-runtime:2.3.2"
+    // https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
+    implementation "io.springfox:springfox-swagger-ui:2.9.2"
+    implementation "io.springfox:springfox-swagger2:2.9.2"
+
 }

@@ -9,6 +9,5 @@ import org.springframework.stereotype.Repository
  */
 @Repository
 interface RestaurantRepository : MongoRepository<Restaurant, String> {
-    fun deleteRestaurantById(id: String): Restaurant
     fun findRestaurantById(id: String): Restaurant
 }

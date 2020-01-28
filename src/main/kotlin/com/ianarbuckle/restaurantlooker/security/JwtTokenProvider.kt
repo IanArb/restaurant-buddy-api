@@ -11,9 +11,9 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Component
-import java.time.LocalDate
 import java.util.*
 import java.util.Base64.getEncoder
+import java.util.concurrent.TimeUnit
 import javax.annotation.PostConstruct
 import javax.servlet.http.HttpServletRequest
 
@@ -26,9 +26,10 @@ class JwtTokenProvider {
     @Value("\${security.token.secret-key}")
     private lateinit var secretKey: String
 
-    private var validityInMilliseconds: Long = LocalDate.now().plusMonths(1).toEpochDay()
+    //30 days
+    private var validityInMilliseconds: Long = 864_000_000
 
-    private val refreshValidityInMilliseconds: Long = LocalDate.now().plusMonths(2).toEpochDay()
+    private val refreshValidityInMilliseconds: Long = 864_000_000
 
     @Autowired
     private lateinit var userDetailsService: CustomUserDetailsService
@@ -42,7 +43,7 @@ class JwtTokenProvider {
         val claims = Jwts.claims().setSubject(uuid)
         claims["roles"] = set
         val now = Date()
-        val validity = Date(validityInMilliseconds)
+        val validity = Date(now.time + TimeUnit.DAYS.toMillis(validityInMilliseconds))
         return buildJwtToken(claims, now, validity)
     }
 
@@ -50,7 +51,7 @@ class JwtTokenProvider {
         val claims = Jwts.claims().setSubject(uuid)
         claims["roles"] = set
         val now = Date()
-        val validity = Date(refreshValidityInMilliseconds)
+        val validity = Date(now.time + TimeUnit.DAYS.toMillis(validityInMilliseconds))
         return buildJwtToken(claims, now, validity)
     }
 
