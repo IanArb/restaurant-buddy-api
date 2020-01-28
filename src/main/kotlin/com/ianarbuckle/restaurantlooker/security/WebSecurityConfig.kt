@@ -45,7 +45,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
                         "/swagger-ui.html").permitAll()
                 .antMatchers("/authentication/login").permitAll()
                 .antMatchers("/authentication/register").permitAll()
-                .antMatchers("/authentication/retrieveUser").hasAnyAuthority()
+                .antMatchers("/authentication/retrieveUser").permitAll()
                 .antMatchers("/booking/**").hasAnyAuthority().anyRequest().authenticated()
                 .antMatchers("/restaurants/**").hasAnyAuthority().anyRequest().authenticated()
                 .antMatchers("/tables/**").hasAnyAuthority().anyRequest().authenticated()
