@@ -1,6 +1,6 @@
 package com.ianarbuckle.restaurantlooker.exception
 
-import org.joda.time.LocalDateTime
+import java.time.LocalDateTime
 
 /**
  * @author ianarbuckle on 02/09/2018.

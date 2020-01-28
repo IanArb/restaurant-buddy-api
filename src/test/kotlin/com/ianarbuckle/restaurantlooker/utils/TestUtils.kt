@@ -12,7 +12,8 @@ import com.ianarbuckle.restaurantlooker.restaurants.model.Restaurant
 import com.ianarbuckle.restaurantlooker.tables.model.Column
 import com.ianarbuckle.restaurantlooker.tables.model.Row
 import com.ianarbuckle.restaurantlooker.tables.model.Tables
-import org.joda.time.DateTime
+import java.time.LocalDateTime
+import java.time.Month
 
 
 /**
@@ -31,7 +32,7 @@ object TestUtils {
     }
 
     fun createRestaurant(): Restaurant {
-        val dateTime = DateTime("2019-05-07T15:48:35.095Z").toLocalDateTime()
+        val dateTime = LocalDateTime.of(2020, Month.JANUARY, 1, 10, 10, 30)
         return Restaurant("1", dateTime,  "Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
                 Location(0.5f, 0.10f), "OPEN", createMenu(), "")
     }
@@ -55,7 +56,8 @@ object TestUtils {
     }
 
     fun createBooking(): Booking {
-        val dateTime = DateTime("2019-05-07T15:48:35.095Z").toLocalDateTime()
+        val dateTime = LocalDateTime.of(2020, Month.JANUARY, 1, 10, 10, 30)
+
         val owner = Owner("24345-34534-34534", "John Doe", "iarbuckle@mail.com", PhoneNumber(353, 1234567890), false, dateTime.toString(), "17:00")
         val details = RestaurantDetails("Crillo's", "imageUrl", "address", Location(0.0f, 0.0f))
         return Booking("1", owner, details, Table("14", "RESERVED", TableCharacteristics("FAMILY", 8, true)))

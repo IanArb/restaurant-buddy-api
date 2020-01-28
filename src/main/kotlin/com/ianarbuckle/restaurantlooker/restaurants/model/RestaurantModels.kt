@@ -1,18 +1,39 @@
 package com.ianarbuckle.restaurantlooker.restaurants.model
 
-import org.joda.time.LocalDateTime
+import io.swagger.annotations.ApiModel
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
+import java.time.LocalDateTime
+import javax.validation.constraints.NotEmpty
 
 
 /**
  * @author ianarbuckle on 21/05/2018.
  */
 
+@ApiModel(description = "Details of Restaurant")
 @Document
-data class Restaurant(@Id val id: String?, @CreatedDate val createdAt: LocalDateTime?, val restaurantName: String?, val description: String?, val county: String?, val street: String?,
-                      val address: String?, val location: Location?, val status: String?, val dishes: MutableList<Dish>?, val imageUrl: String?)
+data class Restaurant(@Id val id: String?,
+                      @CreatedDate
+                      val createdAt: LocalDateTime?,
+                      @NotEmpty
+                      val restaurantName: String?,
+                      val description: String?,
+                      @NotEmpty
+                      val county: String?,
+                      @NotEmpty
+                      val street: String?,
+                      @NotEmpty
+                      val address: String?,
+                      @NotEmpty
+                      val location: Location?,
+                      @NotEmpty
+                      val status: String?,
+                      @NotEmpty
+                      val dishes: MutableList<Dish>?,
+                      @NotEmpty
+                      val imageUrl: String?)
 
 @Document
 data class Location(val latitude: Float, val longitude: Float)
