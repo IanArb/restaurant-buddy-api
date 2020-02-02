@@ -1,11 +1,13 @@
 package com.ianarbuckle.restaurantlooker.authentication.model
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
 /**
  * @author ianarbuckle on 21/09/2019.
  */
+@JsonIgnoreProperties(value = ["password", "isEnabled"])
 @Document
 data class User(@Id val id: String? = null,
                 val uuid: String? = null,
