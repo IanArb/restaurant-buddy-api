@@ -1,2 +1,9 @@
 rootProject.name = 'restaurant-looker'
 
+include ':authentication-server'
+include ':booking-server'
+include ':eureka-naming-server'
+include ':restaurants-server'
+include ':spring-cloud-config'
+include ':table-map-server'
+
